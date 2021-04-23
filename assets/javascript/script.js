@@ -1,6 +1,7 @@
 let timer;
 let time = 90;
 let currentQuestion = 0;
+let askedQuestions = [];
 //questions
 const questions = [
   {
@@ -40,6 +41,7 @@ document
   .addEventListener("click", function (event) {
     if (event.target.className.indexOf("answer")) {
       //answer hndler goes here
+      console.log(event.target.innerHTML);
     }
   });
 
@@ -68,29 +70,58 @@ function startTimer() {
 // generate the question
 function generateQuestion() {
   currentQuestion = pickQuestion();
-  const ansers = randomAnswerOrder(questions[currentQuestion].choice);
-  const tempalte = `
+  const answers = randomAnswerOrder(questions[currentQuestion].choice);
+  console.log(answers);
+  const template = `
         <h2 class="question">${questions[currentQuestion].wording}</h2>
         <ul class="answers">
-        <li class="answer" id="ans1"><button>answer1</button></li>
-        <li class="answer" id="ans2"><button>answer2</button></li>
-        <li class="answer" id="ans3"><button>answer3</button></li>
-        <li class="answer" id="ans4"><button>answer4</button></li>
+        <li class="answer" id="ans1"><button>${answers[0]}</button></li>
+        <li class="answer" id="ans2"><button>${answers[1]}</button></li>
+        <li class="answer" id="ans3"><button>${answers[2]}</button></li>
+        <li class="answer" id="ans4"><button>${answers[3]}</button></li>
         </ul>
     `;
 
-  //selector.innerHTML = template
+  console.log(template);
+  document.querySelector("#quiz-question").innerHTML = template;
 }
 
+// randomly pick a question to ask and make sure is has not been asked before
 function pickQuestion() {
-  return Math.floor(Math.random() * questions.length);
+  const test = Math.floor(Math.random() * questions.length);
+  //   while (true) {
+  //     if (askedQuestions.includes(test)) {
+  //       test = Math.floor(Math.random() * questions.length);
+  //     }
+  //     if (askedQuestions.length === questions.length) {
+  //       break;
+  //     }
+  //   }
+  return test;
 }
 
+// set the question answers to a random ordered array
 function randomAnswerOrder(answers) {
   const newAnswers = [];
   answers.forEach((answer) => {
     newAnswers.push(answer);
   });
   console.log(newAnswers);
+  shuffleArray(newAnswers, 10);
+  console.log(newAnswers);
+  return newAnswers;
 }
+
+// randomize the order of an array
+function shuffleArray(arr, times) {
+  if (times > 0) {
+    const toSwap = Math.floor(Math.random() * arr.length);
+    const temp = arr[0];
+    arr[0] = arr[toSwap];
+    arr[toSwap] = temp;
+    times -= 1;
+    shuffleArray(arr, times);
+  }
+}
+
 function endQuiz() {}
