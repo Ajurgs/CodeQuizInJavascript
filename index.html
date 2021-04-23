@@ -27,19 +27,20 @@
             <div class="quiz-question" id="quiz-question">
               <!-- dynamicly makes the question -->
             </div>
+            <div class="hidden" id="result"></div>
           </section>
           <section class="quiz-display hidden" id="endscreen">
             <!-- show score and form to enter initials/name -->
             <h2>All Done!</h2>
-            <p>Your score is <span>score</span></p>
+            <p>Your score is <span id="score">score</span></p>
             <form id="scoreForm" action="">
               Initials: <input type="text" name="initials" />
               <input type="button" onclick="addHighscore()" value="Submit" />
             </form>
           </section>
-          <section class="quiz-display" id="highscore">
-            <!-- highscores -->
-          </section>
+        </section>
+        <section class="quiz-display hidden" id="highscore">
+          <!-- highscores -->
         </section>
       </section>
     </main>

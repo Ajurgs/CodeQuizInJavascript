@@ -2,6 +2,16 @@ let timer;
 let time = 90;
 let currentQuestion = 0;
 let askedQuestions = [];
+let score = 0;
+let pointCorrect = 1;
+let timerPenelty = 5;
+let currentQuestions = [];
+
+const result = document.querySelector("#result");
+const quiz = document.querySelector("#quiz");
+const start = document.querySelector("#start");
+const endscreen = document.querySelector("#endscreen");
+const highscore = document.querySelector("#highscore");
 //questions
 const questions = [
   {
@@ -32,25 +42,27 @@ document.querySelector("#startBtn").addEventListener("click", function () {
   startQuiz();
 });
 
-//answer click function
-
-//input form submit
-// make
+// click on answer button
 document
   .querySelector(".quiz-question")
   .addEventListener("click", function (event) {
     if (event.target.className.indexOf("answer")) {
-      //answer hndler goes here
-      console.log(event.target.innerHTML);
+      // answer handler goes here
+      // check if correct answer
+      checkAnswer(event.target.innerHTML);
+      // remove the asked question form the curent questions list
+      removeQuestion(currentQuestion);
+      // generate the next question
+      generateQuestion();
     }
   });
 
 // function to start quiz
 function startQuiz() {
-  //hide start screen
-  document.querySelector("#start").classList.add("hidden");
-  //show quiz question container
-  document.querySelector("#quiz").classList.remove("hidden");
+  // show the quiz hide the start menu
+  showHide(quiz, start);
+  // set currentQuestions array to the full array of questions
+  currentQuestions = questions;
   //generateQUestion
   generateQuestion();
 }
@@ -69,34 +81,27 @@ function startTimer() {
 }
 // generate the question
 function generateQuestion() {
-  currentQuestion = pickQuestion();
-  const answers = randomAnswerOrder(questions[currentQuestion].choice);
-  console.log(answers);
-  const template = `
-        <h2 class="question">${questions[currentQuestion].wording}</h2>
-        <ul class="answers">
-        <li class="answer" id="ans1"><button>${answers[0]}</button></li>
-        <li class="answer" id="ans2"><button>${answers[1]}</button></li>
-        <li class="answer" id="ans3"><button>${answers[2]}</button></li>
-        <li class="answer" id="ans4"><button>${answers[3]}</button></li>
-        </ul>
-    `;
-
-  console.log(template);
-  document.querySelector("#quiz-question").innerHTML = template;
+  if (currentQuestions.length > 0) {
+    currentQuestion = pickQuestion();
+    const answers = randomAnswerOrder(questions[currentQuestion].choice);
+    const template = `
+          <h2 class="question">${questions[currentQuestion].wording}</h2>
+          <ul class="answers">
+          <li class="answer" id="ans1"><button>${answers[0]}</button></li>
+          <li class="answer" id="ans2"><button>${answers[1]}</button></li>
+          <li class="answer" id="ans3"><button>${answers[2]}</button></li>
+          <li class="answer" id="ans4"><button>${answers[3]}</button></li>
+          </ul>
+      `;
+    document.querySelector("#quiz-question").innerHTML = template;
+  } else {
+    endQuiz();
+  }
 }
 
 // randomly pick a question to ask and make sure is has not been asked before
 function pickQuestion() {
-  const test = Math.floor(Math.random() * questions.length);
-  //   while (true) {
-  //     if (askedQuestions.includes(test)) {
-  //       test = Math.floor(Math.random() * questions.length);
-  //     }
-  //     if (askedQuestions.length === questions.length) {
-  //       break;
-  //     }
-  //   }
+  const test = Math.floor(Math.random() * currentQuestions.length); // randomly choose from the remaining questions
   return test;
 }
 
@@ -106,13 +111,11 @@ function randomAnswerOrder(answers) {
   answers.forEach((answer) => {
     newAnswers.push(answer);
   });
-  console.log(newAnswers);
   shuffleArray(newAnswers, 10);
-  console.log(newAnswers);
   return newAnswers;
 }
 
-// randomize the order of an array
+// sort of randomizes the order of an array
 function shuffleArray(arr, times) {
   if (times > 0) {
     const toSwap = Math.floor(Math.random() * arr.length);
@@ -124,4 +127,38 @@ function shuffleArray(arr, times) {
   }
 }
 
-function endQuiz() {}
+// check to see if the answer is correct
+function checkAnswer(toCheck) {
+  if (toCheck === currentQuestions[currentQuestion]) {
+    // answer is true;
+    score += pointCorrect;
+  } else {
+    time -= timerPenelty;
+  }
+}
+
+function showResults(value) {
+  result.classList.remove("hidden");
+}
+
+function removeQuestion(index) {
+  currentQuestions.splice(index, 1);
+}
+function endQuiz() {
+  console.log("quiz over");
+  // stop timer
+  clearInterval(timer);
+  //set timer to 0
+  document.querySelector("#Time").textContent = time;
+  showHide(endscreen, quiz);
+  // display score on the page
+  document.querySelector("#score").textContent = score;
+}
+
+// shows and hides input containers
+function showHide(show, hide) {
+  //hide  container
+  hide.classList.add("hidden");
+  //show  container
+  show.classList.remove("hidden");
+}
