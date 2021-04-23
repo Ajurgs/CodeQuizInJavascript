@@ -9,6 +9,46 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <script src="/assets/javascript/script.js"></script>
+    <header>
+      <button>View Highscores</button>
+      <h2>Time: <span id="Time">00</span></h2>
+    </header>
+    <main>
+      <section class="container">
+        <section class="quiz">
+          <section class="quiz-display" id="start">
+            <!-- start screen -->
+            <h1>Coding Quiz</h1>
+            <p>desctiption of quiz</p>
+            <button id="startBtn">start</button>
+          </section>
+          <section class="quiz-display hidden" id="quiz">
+            <!-- quizz displayed here -->
+            <div class="quiz-question">
+              <h2 class="question">Wording</h2>
+              <ul class="answers">
+                <li class="answer" id="ans1"><button>answer1</button></li>
+                <li class="answer" id="ans2"><button>answer2</button></li>
+                <li class="answer" id="ans3"><button>answer3</button></li>
+                <li class="answer" id="ans4"><button>answer4</button></li>
+              </ul>
+            </div>
+          </section>
+          <section class="quiz-display hidden" id="endscreen">
+            <!-- show score and form to enter initials/name -->
+            <h2>All Done!</h2>
+            <p>Your score is <span>score</span></p>
+            <form id="scoreForm" action="">
+              Initials: <input type="text" name="initials" />
+              <input type="button" onclick="addHighscore()" value="Submit" />
+            </form>
+          </section>
+          <section class="quiz-display" id="highscore">
+            <!-- highscores -->
+          </section>
+        </section>
+      </section>
+    </main>
+    <script src="./assets/javascript/script.js"></script>
   </body>
 </html>

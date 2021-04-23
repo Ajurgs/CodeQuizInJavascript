@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1.5;
+  background-color: rgb(191, 202, 202);
+}
+
+header {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quiz-display {
+  border: 0.1rem solid darkgray;
+  min-width: 50rem;
+  min-height: 50rem;
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+.quiz-display h1 {
+  font-size: 3rem;
+  padding: 1rem;
+}
+.quiz-display p {
+  font-size: 1.5rem;
+}
+.quiz-question h2 {
+  font-size: 3rem;
+}
