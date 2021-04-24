@@ -6,12 +6,20 @@ let score = 0;
 let pointCorrect = 1;
 let timerPenelty = 5;
 let currentQuestions = [];
+let quizRunning = false;
+
+let highscores = [{ initals: AA, score: 00 }];
 
 const result = document.querySelector("#result");
 const quiz = document.querySelector("#quiz");
+const quizQuestion = document.querySelector(".quiz-question");
 const start = document.querySelector("#start");
 const endscreen = document.querySelector("#endscreen");
 const highscore = document.querySelector("#highscore");
+const addToHighScoreBtn = document.querySelector("#addTo");
+const startBtn = document.querySelector("#startBtn");
+
+const scoreList = document.querySelector("#id");
 //questions
 const questions = [
   {
@@ -36,29 +44,41 @@ const questions = [
   },
 ];
 
+//pull saved highscores on start
+
 //start button function
-document.querySelector("#startBtn").addEventListener("click", function () {
+startBtn.addEventListener("click", function () {
   startTimer();
   startQuiz();
 });
 
 // click on answer button
-document
-  .querySelector(".quiz-question")
-  .addEventListener("click", function (event) {
-    if (event.target.className.indexOf("answer")) {
-      // answer handler goes here
-      // check if correct answer
-      checkAnswer(event.target.innerHTML);
-      // remove the asked question form the curent questions list
-      removeQuestion(currentQuestion);
-      // generate the next question
-      generateQuestion();
-    }
-  });
+quizQuestion.addEventListener("click", function (event) {
+  event.preventDefault;
+  if (event.target.className.indexOf("answer")) {
+    // answer handler goes here
+    // check if correct answer
+    checkAnswer(event.target.innerHTML);
+    // remove the asked question form the curent questions list
+    removeQuestion(currentQuestion);
+    // generate the next question
+    generateQuestion();
+  }
+});
+
+// click on the add to the high score
+addToHighScoreBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  // get initials
+  // add the new score to the score array
+  highscores.push({});
+  // add to local storage
+});
 
 // function to start quiz
 function startQuiz() {
+  // set quiz running to true
+  quizRunning = true;
   // show the quiz hide the start menu
   showHide(quiz, start);
   // set currentQuestions array to the full array of questions
@@ -146,6 +166,8 @@ function removeQuestion(index) {
 }
 function endQuiz() {
   console.log("quiz over");
+  // set quizrunning to false
+  quizRunning = false;
   // stop timer
   clearInterval(timer);
   //set timer to 0
@@ -162,3 +184,36 @@ function showHide(show, hide) {
   //show  container
   show.classList.remove("hidden");
 }
+
+function displayHighscoresList() {
+  if (questions.length >= 1) {
+    let range = Math.min(questions.length, 5);
+    for (i = 0; i < range; i++) {
+      let score = highscores[i];
+      let listEntry = document.querySelector(`list${i}`);
+      listEntry.innerHTML = `${score.initals} ____ ${score.score}`;
+    }
+  }
+}
+
+function getSavedHighscores() {
+  var storedScores = JSON.parse(localStorage.getItem("scores"));
+  if (storedScores !== null) {
+    highscore = storedScores;
+  }
+  displayHighscoresList();
+}
+// save scores
+function saveHighscores() {
+  localStorage.setItem("scores", JSON.stringify(highscores));
+}
+//todo
+// end screen functonality
+//  save initials
+//  save btn goes to leader board
+// add leader board
+//  leaderboard has button to start menu
+//  display leaderboard
+// leaderboard button
+//  brings up leaderboard if not in a quiz
+// style?

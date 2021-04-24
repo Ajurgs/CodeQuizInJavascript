@@ -35,12 +35,20 @@
             <p>Your score is <span id="score">score</span></p>
             <form id="scoreForm" action="">
               Initials: <input type="text" name="initials" />
-              <input type="button" onclick="addHighscore()" value="Submit" />
+              <input type="button" id="addTo" value="Submit" />
             </form>
           </section>
         </section>
         <section class="quiz-display hidden" id="highscore">
           <!-- highscores -->
+          <h2>Highscores</h2>
+          <ol>
+            <li class="hidden" id="list0">first</li>
+            <li class="hidden" id="list1">second</li>
+            <li class="hidden" id="list2">third</li>
+            <li class="hidden" id="lsit3">forth</li>
+            <li class="hidden" id="list4">fifth</li>
+          </ol>
         </section>
       </section>
     </main>
