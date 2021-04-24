@@ -1,7 +1,6 @@
 let timer;
 let time = 90;
 let currentQuestion = 0;
-let askedQuestions = [];
 let currentScore = 0;
 let pointCorrect = 1;
 let timerPenelty = 5;
@@ -24,7 +23,7 @@ const addToHighScoreBtn = document.querySelector("#addToScores");
 const startBtn = document.querySelector("#startBtn");
 const toStartBtn = document.querySelector("#toStart");
 const toHighscoreBtn = document.querySelector("#toHighscore");
-
+const clearHighscores = document.querySelector("#clearHighscores");
 //questions
 const questions = [
   {
@@ -50,6 +49,7 @@ const questions = [
 ];
 
 //pull saved highscores on start
+getSavedHighscores();
 
 //start button function
 startBtn.addEventListener("click", function () {
@@ -73,20 +73,34 @@ toStartBtn.addEventListener("click", function () {
 
 // add to high scores button
 addToHighScoreBtn.addEventListener("click", function () {
-  // set quizrunning to false
-  quizRunning = false;
-  // add to highscores array
   let initialsText = initialsInput.value.trim();
-  let player = { initials: initialsText, score: currentScore };
-  highscores.push(player);
-  console.log(highscores);
-  sortScores();
-  saveHighscores();
+  if (initialsText !== null && initialsText !== "") {
+    // require initials
+    // set quizrunning to false
+    quizRunning = false;
+    // add to highscores array
+
+    let player = { initials: initialsText, score: currentScore };
+    highscores.push(player);
+    console.log(highscores);
+    sortScores(); // arrange scores form high to low
+    saveHighscores();
+    getSavedHighscores();
+    displayHighscoresList();
+    showHide(start, endscreen);
+    showHide(highscore, quizGame);
+    hide(header);
+  } else {
+    alert("please enter initials");
+  }
+});
+
+// clear highscores button
+clearHighscores.addEventListener("click", function () {
+  localStorage.removeItem("scores");
   getSavedHighscores();
   displayHighscoresList();
-  showHide(start, endscreen);
-  showHide(highscore, quizGame);
-  hide(header);
+  console.log("cleared highscores");
 });
 
 // click on answer button
@@ -110,7 +124,9 @@ function startQuiz() {
   // show the quiz hide the start menu
   showHide(quiz, start);
   // set currentQuestions array to the full array of questions
-  currentQuestions = questions;
+
+  currentQuestions = questions.slice(0, questions.length);
+  console.log(currentQuestions);
   //generateQUestion
   generateQuestion();
 }
@@ -178,9 +194,10 @@ function shuffleArray(arr, times) {
 // check to see if the answer is correct
 function checkAnswer(toCheck) {
   if (toCheck === currentQuestions[currentQuestion]) {
-    // answer is true;
+    // answer is true add points to score
     currentScore += pointCorrect;
   } else {
+    // lower time
     time -= timerPenelty;
   }
 }
@@ -191,6 +208,8 @@ function showResults(value) {
 
 function removeQuestion(index) {
   currentQuestions.splice(index, 1);
+  console.log(currentQuestions);
+  console.log(questions);
 }
 function endQuiz() {
   console.log("quiz over");
@@ -218,34 +237,37 @@ function show(show) {
 function hide(hide) {
   hide.classList.add("hidden");
 }
+// displays the highscore list to the ordered list
 function displayHighscoresList() {
   let playerScore;
   let newText = ``;
-
-  if (highscores.length >= 1) {
-    let range = Math.min(highscores.length, 5);
-    for (i = 0; i < range; i++) {
+  let listEntry = ``;
+  for (i = 0; i < 5; i++) {
+    listEntry = document.querySelector(`#list${i}`);
+    if (i < highscores.length) {
       playerScore = highscores[i];
-      let listEntry = document.querySelector(`#list${i}`);
-      newText = `${playerScore.initials}  ${playerScore.score}`;
 
-      listEntry.innerHTML = newText;
-      show(listEntry);
+      newText = `${playerScore.initials}  ${playerScore.score}`;
+    } else {
+      newText = "";
     }
+    listEntry.innerHTML = newText;
   }
 }
-
+// pull highscores form local storeage
 function getSavedHighscores() {
   var storedScores = JSON.parse(localStorage.getItem("scores"));
   if (storedScores !== null) {
     highscores = storedScores;
+  } else {
+    highscores = [];
   }
 }
-// save scores
+// save scores to local sotreage
 function saveHighscores() {
   localStorage.setItem("scores", JSON.stringify(highscores));
 }
-
+// sort sores from highest to lowest
 function sortScores() {
   if (highscores.length <= 1) {
     // if one or fewer elements in array
@@ -259,11 +281,4 @@ function sortScores() {
 }
 //todo
 // end screen functonality
-//  save initials
-//  save btn goes to leader board
-// add leader board
-//  leaderboard has button to start menu
-//  display leaderboard
-// leaderboard button
-//  brings up leaderboard if not in a quiz
 // style?
