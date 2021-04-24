@@ -29,22 +29,22 @@ const questions = [
   {
     wording: "Question 1",
     choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "green",
+    answer: "ans1",
   },
   {
     wording: "Question 2",
     choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "green",
+    answer: "ans1",
   },
   {
     wording: "Question 3",
     choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "green",
+    answer: "ans1",
   },
   {
     wording: "Question 4",
     choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "green",
+    answer: "ans1",
   },
 ];
 
@@ -196,7 +196,7 @@ function shuffleArray(arr, times) {
 
 // check to see if the answer is correct
 function checkAnswer(toCheck) {
-  if (toCheck === currentQuestions[currentQuestion]) {
+  if (toCheck === currentQuestions[currentQuestion].answer) {
     // answer is true add points to score
     currentScore += pointCorrect;
   } else {
