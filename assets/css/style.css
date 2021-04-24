@@ -20,27 +20,75 @@ header {
 h2 {
   font-size: 3rem;
 }
+
+.hidden {
+  display: none;
+}
+label {
+  font-size: 1.5rem;
+}
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .quiz-display {
-  border: 0.1rem solid darkgray;
   min-width: 50rem;
   min-height: 50rem;
   text-align: center;
 }
-.hidden {
-  display: none;
-}
 .quiz-display h1 {
-  font-size: 3rem;
+  font-size: 5rem;
   padding: 1rem;
 }
 .quiz-display p {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  padding-bottom: 2rem;
+}
+.quiz-display button {
+  font-size: 4rem;
+  font-weight: bold;
+  min-width: 15rem;
+  min-height: 7rem;
+  background: rgb(9, 102, 9);
+  border-radius: 2rem;
 }
 .quiz-question h2 {
-  font-size: 3rem;
+  font-size: 4.5rem;
+}
+
+.answer {
+  padding: 0.5rem;
+}
+.answer button {
+  min-width: 25rem;
+  min-height: 3rem;
+  background-color: rgb(34, 65, 39);
+  color: whitesmoke;
+}
+#highscore {
+  padding: 3rem;
+}
+#highscore h2 {
+  font-size: 4rem;
+}
+#highscore ol {
+  padding: 2rem;
+}
+#highscore ol li {
+  font-size: 2rem;
+}
+#highscore button {
+  font-size: 2rem;
+  min-width: none;
+  min-height: auto;
+  border: none;
+  margin: 2rem;
+}
+#toHighscore {
+  text-decoration: none;
+  border: none;
+  text-align: center;
+  background: rgb(97, 105, 121);
+  padding: 1rem 2rem;
 }

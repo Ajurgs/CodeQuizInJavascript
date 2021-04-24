@@ -50,7 +50,7 @@ const questions = [
 
 //pull saved highscores on start
 getSavedHighscores();
-
+displayHighscoresList();
 //start button function
 startBtn.addEventListener("click", function () {
   startTimer();
