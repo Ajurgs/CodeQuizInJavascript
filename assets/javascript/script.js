@@ -27,24 +27,24 @@ const clearHighscores = document.querySelector("#clearHighscores");
 //questions
 const questions = [
   {
-    wording: "what is your favorite color",
-    choice: ["red", "blue", "yellow", "green"],
+    wording: "Question 1",
+    choice: ["ans1", "ans2", "ans3", "ans4"],
     answer: "green",
   },
   {
-    wording: "what is your favorite animal",
-    choice: ["red", "blue", "yellow", "green"],
-    answer: "blue",
+    wording: "Question 2",
+    choice: ["ans1", "ans2", "ans3", "ans4"],
+    answer: "green",
   },
   {
-    wording: "what is your favorite tree",
-    choice: ["red", "blue", "yellow", "green"],
-    answer: "yellow",
+    wording: "Question 3",
+    choice: ["ans1", "ans2", "ans3", "ans4"],
+    answer: "green",
   },
   {
-    wording: "what is your favorite ocean",
-    choice: ["red", "blue", "yellow", "green"],
-    answer: "red",
+    wording: "Question 4",
+    choice: ["ans1", "ans2", "ans3", "ans4"],
+    answer: "green",
   },
 ];
 
@@ -126,7 +126,10 @@ function startQuiz() {
   // set currentQuestions array to the full array of questions
 
   currentQuestions = questions.slice(0, questions.length);
+  console.log("current Questions");
   console.log(currentQuestions);
+  console.log("question list");
+  console.log(questions);
   //generateQUestion
   generateQuestion();
 }
@@ -147,9 +150,9 @@ function startTimer() {
 function generateQuestion() {
   if (currentQuestions.length > 0) {
     currentQuestion = pickQuestion();
-    const answers = randomAnswerOrder(questions[currentQuestion].choice);
+    const answers = randomAnswerOrder(currentQuestions[currentQuestion].choice);
     const template = `
-          <h2 class="question">${questions[currentQuestion].wording}</h2>
+          <h2 class="question">${currentQuestions[currentQuestion].wording}</h2>
           <ul class="answers">
           <li class="answer" id="ans1"><button>${answers[0]}</button></li>
           <li class="answer" id="ans2"><button>${answers[1]}</button></li>
@@ -205,11 +208,10 @@ function checkAnswer(toCheck) {
 function showResults(value) {
   result.classList.remove("hidden");
 }
-
+// remove asked questions from the current list of questions
 function removeQuestion(index) {
   currentQuestions.splice(index, 1);
   console.log(currentQuestions);
-  console.log(questions);
 }
 function endQuiz() {
   console.log("quiz over");

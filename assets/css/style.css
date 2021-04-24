@@ -17,6 +17,9 @@ header {
   align-items: center;
   font-size: 2rem;
 }
+h2 {
+  font-size: 3rem;
+}
 .container {
   display: flex;
   flex-direction: column;
