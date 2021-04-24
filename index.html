@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <header>
-      <button>View Highscores</button>
+    <header id="header">
+      <button id="toHighscore">View Highscores</button>
       <h2>Time: <span id="Time">00</span></h2>
     </header>
     <main>
       <section class="container">
-        <section class="quiz">
+        <section class="quiz" id="quiz-game">
           <section class="quiz-display" id="start">
             <!-- start screen -->
             <h1>Coding Quiz</h1>
@@ -33,23 +33,26 @@
             <!-- show score and form to enter initials/name -->
             <h2>All Done!</h2>
             <p>Your score is <span id="score">score</span></p>
-            <form id="scoreForm" action="">
-              Initials: <input type="text" name="initials" />
-              <input type="button" id="addTo" value="Submit" />
+            <form id="scoreForm" method="POST">
+              <label for="initials">Initials:</label>
+              <input type="text" name="initials" id="initials" />
+              <input type="button" id="addToScores" value="Submit" />
             </form>
           </section>
         </section>
-        <section class="quiz-display hidden" id="highscore">
-          <!-- highscores -->
-          <h2>Highscores</h2>
-          <ol>
-            <li class="hidden" id="list0">first</li>
-            <li class="hidden" id="list1">second</li>
-            <li class="hidden" id="list2">third</li>
-            <li class="hidden" id="lsit3">forth</li>
-            <li class="hidden" id="list4">fifth</li>
-          </ol>
-        </section>
+      </section>
+      <section class="quiz-display hidden" id="highscore">
+        <!-- highscores -->
+        <h2>Highscores</h2>
+        <ol>
+          <li class="hidden" id="list0">first</li>
+          <li class="hidden" id="list1">second</li>
+          <li class="hidden" id="list2">third</li>
+          <li class="hidden" id="lsit3">forth</li>
+          <li class="hidden" id="list4">fifth</li>
+        </ol>
+        <button id="toStart">To Start Menu</button>
+        <button id="clearHighscores">Clear Highscores</button>
       </section>
     </main>
     <script src="./assets/javascript/script.js"></script>
