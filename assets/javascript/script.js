@@ -81,12 +81,59 @@ const questions = [
   {
     wording: "What dose the 'this' keyword refer to?",
     choice: [
-      "The document",
+      "The javascript document",
       "The webpage",
       "The object that called it",
       "This question",
     ],
     answer: "The object that called it",
+  },
+  {
+    wording: "What character pair is used to denote an Object?",
+    choice: ["()", "[]", '""', "{}"],
+    answer: "{}",
+  },
+  {
+    wording: "What do you pass into a function?",
+    choice: ["Arguments", "Inputs", "Commands", "Properties"],
+    answer: "Arguments",
+  },
+  {
+    wording: "What do you write to print someting to the console?",
+    choice: [
+      "console.write()",
+      "console.print()",
+      "console.display()",
+      "console.log()",
+    ],
+    answer: "console.log()",
+  },
+  {
+    wording:
+      "What charactrer is used to denote an id attribute when useing a querySelector?",
+    choice: [".", "#", "@", "$"],
+    answer: "#",
+  },
+  {
+    wording:
+      "How would you remove the 5th element in an array that has a lenght of 9?",
+    choice: [
+      "arr.splice(5,0)",
+      "arr.splice(5,10)",
+      "arr.splice(5,1)",
+      "arr.splice(5,6)",
+    ],
+    answer: "arr.splice(5,1)",
+  },
+  {
+    wording: "How would you add a string to the end of an array ",
+    choice: [
+      "array + string",
+      "array.concat(string)",
+      "array.unshift(string)",
+      "array.push(string)",
+    ],
+    answer: "array.push(string)",
   },
 ];
 
@@ -323,6 +370,3 @@ function sortScores() {
     highscores.reverse();
   }
 }
-//todo
-// end screen functonality
-// style?
