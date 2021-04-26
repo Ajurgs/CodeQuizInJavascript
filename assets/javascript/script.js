@@ -1,5 +1,5 @@
 let timer;
-let time = 90;
+let time = 60;
 let currentQuestion = 0;
 let currentScore = 0;
 let pointCorrect = 1;
@@ -27,24 +27,66 @@ const clearHighscores = document.querySelector("#clearHighscores");
 //questions
 const questions = [
   {
-    wording: "Question 1",
-    choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "ans1",
+    wording: "How do you declare a number in JavaScript?",
+    choice: [
+      "int number = 10",
+      ' let number = "10" ',
+      " let number == 10",
+      "let number = 10",
+    ],
+    answer: "let number = 10",
   },
   {
-    wording: "Question 2",
-    choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "ans1",
+    wording: "What character pair is used to denote an array?",
+    choice: ["()", "[]", '""', "{}"],
+    answer: "[]",
   },
   {
-    wording: "Question 3",
-    choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "ans1",
+    wording: "How many Primitive data types are in JavaScript?",
+    choice: ["4", "5", "6", "7"],
+    answer: "7",
   },
   {
-    wording: "Question 4",
-    choice: ["ans1", "ans2", "ans3", "ans4"],
-    answer: "ans1",
+    wording: "What is DOM?",
+    choice: [
+      "Document Object Module",
+      "Document Ordering Method",
+      "Direct Object Manipulation",
+      "Discrete Ordered Math",
+    ],
+    answer: "Document Object Module",
+  },
+  {
+    wording: "How would you compare two variables by just their values?",
+    choice: [" A = B", "A == B", "A === B", "A != B"],
+    answer: "A == B",
+  },
+  {
+    wording:
+      "What Punctuation sepreates the name and value of an objects proerty?",
+    choice: ["A ;", "A ,", "A |", "A :"],
+    answer: "A :",
+  },
+  {
+    wording: "What will not incremnt a variable by 1?",
+    choice: ["i = i + 1", "i + 1", "i += 1", "i++"],
+    answer: "i + 1",
+  },
+  {
+    wording:
+      "Given A is a string of value 20 and B is a number of value 12, What will return true?",
+    choice: ["A == B", "A === B", "A <=B", "A > B"],
+    answer: "A > B",
+  },
+  {
+    wording: "What dose the 'this' keyword refer to?",
+    choice: [
+      "The document",
+      "The webpage",
+      "The object that called it",
+      "This question",
+    ],
+    answer: "The object that called it",
   },
 ];
 
