@@ -16,7 +16,7 @@ I found this assignemnt to be benificial to further my understanding how javascr
 
 # Screenshots
 
-![screenshot](assets\images\screenshot.PNG)
+![screenshot](/assets/images/screenshot.PNG)
 
 # Credits
 
