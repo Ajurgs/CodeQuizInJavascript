@@ -224,6 +224,7 @@ function startQuiz() {
 }
 
 function startTimer() {
+  time = 60;
   timer = setInterval(function () {
     //decrement time
     time--;
